@@ -14,6 +14,10 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
+      - name: Pull from Hugging Face
+        env:
+          HF_TOKEN: ${{ secrets.HUGGINGFACE }}
+        run: git pull https://umeshkhatiwada13:$HF_TOKEN@huggingface.co/spaces/umeshkhatiwada13/football_chatbot main
       - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.HUGGINGFACE }}
