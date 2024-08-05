@@ -13,8 +13,15 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
-      
-      - name: Debug Authentication
+
+      - name: Set up git user
+        run: |
+          git config --global user.email "umeshkhatiwada13@gmail.com"
+          git config --global user.name "umeshkhatiwada13"
+
+      - name: Authenticate with Hugging Face
+        env:
+          HF_TOKEN: ${{ secrets.HUGGINGFACE }}
         run: |
           echo "machine huggingface.co login ${{ secrets.HUGGINGFACE }}" > ~/.netrc
           cat ~/.netrc
@@ -26,7 +33,9 @@ jobs:
           git config pull.rebase true
           git pull --rebase https://umeshkhatiwada13:${{ secrets.HUGGINGFACE }}@huggingface.co/spaces/umeshkhatiwada13/football_chatbot main || git rebase --abort
 
-      - name: Force push to Hugging Face
-        env:
-          HF_TOKEN: ${{ secrets.HUGGINGFACE }}
-        run: git push --force https://umeshkhatiwada13:${{ secrets.HUGGINGFACE }}@huggingface.co/spaces/umeshkhatiwada13/football_chatbot main
+      - name: Resolve conflicts and push
+        run: |
+          git status
+          git add .  # Add resolved files
+          git rebase --continue || git rebase --abort
+          git push --force https://umeshkhatiwada13:${{ secrets.HUGGINGFACE }}@huggingface.co/spaces/umeshkhatiwada13/football_chatbot main
