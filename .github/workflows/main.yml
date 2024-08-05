@@ -19,10 +19,10 @@ jobs:
           HF_TOKEN: ${{ secrets.HUGGINGFACE }}
         run: |
           git config pull.rebase true
-          git pull --rebase https://umeshkhatiwada13:${{ secrets.HUGGINGFACE }}@huggingface.co/spaces/umeshkhatiwada13/football_chatbot main || git rebase --abort
+          git pull --rebase https://umeshkhatiwada13:${{ secrets.HUGGINGFACE }}@huggingface.co/spaces/umeshkhatiwada13/football_chatbot_2 main || git rebase --abort
 
       - name: Resolve conflicts and push
         run: |
           git status
           git add .  # Add resolved files
-          git push https://umeshkhatiwada13:${{ secrets.HUGGINGFACE }}@huggingface.co/spaces/umeshkhatiwada13/football_chatbot main
+          git push https://umeshkhatiwada13:${{ secrets.HUGGINGFACE }}@huggingface.co/spaces/umeshkhatiwada13/football_chatbot_2 main
