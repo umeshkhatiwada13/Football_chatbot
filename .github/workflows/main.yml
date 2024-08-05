@@ -14,11 +14,15 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
-      - name: Pull from Hugging Face
+
+      - name: Pull from Hugging Face with rebase
         env:
           HF_TOKEN: ${{ secrets.HUGGINGFACE }}
-        run: git pull https://umeshkhatiwada13:$HF_TOKEN@huggingface.co/spaces/umeshkhatiwada13/football_chatbot main
-      - name: Push to hub
+        run: |
+          git config pull.rebase true
+          git pull https://umeshkhatiwada13:$HF_TOKEN@huggingface.co/spaces/umeshkhatiwada13/football_chatbot main
+
+      - name: Push to Hugging Face
         env:
           HF_TOKEN: ${{ secrets.HUGGINGFACE }}
-        run: git push https://umeshkhatiwada13:$HF_TOKEN@huggingface.co/spaces/umeshkhatiwada13/football_chatbot main --force
+        run: git push https://umeshkhatiwada13:$HF_TOKEN@huggingface.co/spaces/umeshkhatiwada13/football_chatbot main
