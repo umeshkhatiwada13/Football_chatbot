@@ -20,9 +20,9 @@ jobs:
           HF_TOKEN: ${{ secrets.HUGGINGFACE }}
         run: |
           git config pull.rebase true
-          git pull --rebase https://umeshkhatiwada13:$HF_TOKEN@huggingface.co/spaces/umeshkhatiwada13/football_chatbot main || git rebase --abort
+          git pull --rebase https://umeshkhatiwada13:${{ secrets.HUGGINGFACE }}@huggingface.co/spaces/umeshkhatiwada13/football_chatbot main || git rebase --abort
 
       - name: Force push to Hugging Face
         env:
           HF_TOKEN: ${{ secrets.HUGGINGFACE }}
-        run: git push --force https://umeshkhatiwada13:$HF_TOKEN@huggingface.co/spaces/umeshkhatiwada13/football_chatbot main
+        run: git push --force https://umeshkhatiwada13:${{ secrets.HUGGINGFACE }}@huggingface.co/spaces/umeshkhatiwada13/football_chatbot main
