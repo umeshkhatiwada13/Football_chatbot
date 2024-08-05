@@ -28,16 +28,15 @@ jobs:
           # Add commands to run your tests if any
 
       - name: Deploy to Hugging Face Space
+        env:
+          HF_TOKEN: ${{ secrets.HUGGINGFACE_TOKEN }}
         run: |
           pip install huggingface_hub
           huggingface-cli login --token ${{ secrets.HUGGINGFACE }}
-          huggingface-cli repo create football_bot --type=space
+          huggingface-cli repo create football_bot --type=space --token ${{ secrets.HUGGINGFACE }}
           git lfs install
           git lfs track "*.bin"
           git add .gitattributes
           git add .
           git commit -m "Deploy to Hugging Face Space"
           git push https://huggingface.co/spaces/umeshkhatiwada13/football_chatbot main
-
-      env:
-        HF_TOKEN: ${{ secrets.HUGGINGFACE }}
