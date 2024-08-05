@@ -18,8 +18,7 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HUGGINGFACE }}
         run: |
-          git config pull.rebase true
-          git pull --rebase https://umeshkhatiwada13:${{ secrets.HUGGINGFACE }}@huggingface.co/spaces/umeshkhatiwada13/football_chatbot_2 main || git rebase --abort
+          git pull - https://umeshkhatiwada13:${{ secrets.HUGGINGFACE }}@huggingface.co/spaces/umeshkhatiwada13/football_chatbot_2 main
 
       - name: Resolve conflicts and push
         run: |
