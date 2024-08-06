@@ -19,7 +19,4 @@ jobs:
           HF_TOKEN: ${{ secrets.HUGGINGFACE  }}
         run: git pull
         
-      - name: Push to hub
-        env:
-          HF_TOKEN: ${{ secrets.HUGGINGFACE  }}
-        run: git push https://umeshkhatiwada13:${{ secrets.HUGGINGFACE }}@huggingface.co/spaces/umeshkhatiwada13/football_chatbot_2 main --force
+     
